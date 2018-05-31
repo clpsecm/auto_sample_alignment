@@ -1,0 +1,341 @@
+\documentclass[letter, 10pt]{article}
+% \includeonly{sections/geometry, sections/appendix/app_signalprop}
+%\includeonly{sections/intro, sections/geometry}
+% \includeonly{sections/geometry, sections/appendix/app_signalprop}
+
+%%% ====== Packages ====== %%%
+\usepackage{graphicx,amsmath,amsfonts,amscd,amssymb,amsthm,bm,bbm,url,xcolor,latexsym,mathdots,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{tgpagella}
+\usepackage{fullpage}
+\usepackage[small,bf]{caption}
+%\usepackage{subfig}
+\usepackage{subcaption}
+\usepackage{microtype}
+\usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage{hyperref}
+\usepackage{framed}
+\usepackage{ulem}\normalem
+% \usepackage{tikz}
+\usepackage{fge}
+\usepackage[toc, page]{appendix}
+\usepackage{scalerel,stackengine} % For wide check
+\usepackage[nameinlink]{cleveref}
+\usepackage{comment}
+
+
+
+
+%%% ====== Page Formatting ====== %%
+\pagestyle{plain}
+\numberwithin{equation}{section}
+\allowdisplaybreaks  
+\hypersetup{
+    colorlinks=true,%
+    citecolor=blue,%
+    filecolor=blue,%
+    linkcolor=blue,%
+    urlcolor=blue
+}
+\renewcommand\floatpagefraction{.95}
+\renewcommand\topfraction{.95}
+\renewcommand\bottomfraction{.95}
+\renewcommand\textfraction{.05}
+\newcommand{\vsni}{\vspace{.1in} \noindent}
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+\setlength{\captionmargin}{30pt}
+
+
+%%% ====== Theorem Layout ====== %%
+%-Variants with theorem layout
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{finding}{Empirical Finding}[section] 
+
+%-Change proof to bold font
+\renewenvironment{proof}{\noindent {\bf Proof.} }{\endprf\par}
+\def \endprf{\hfill {\vrule height6pt width6pt depth0pt}\medskip}
+\renewcommand{\qed}{{\unskip\nobreak\hfil\penalty50\hskip2em\vadjust{}
+           \nobreak\hfil$\Box$\parfillskip=0pt\finalhyphendemerits=0\par}}
+
+
+%%% ====== Math Texts/Sets/Brackets ====== %%
+%-Texts
+\renewcommand{\mathbf}{\boldsymbol} 
+\newcommand{\mb}{\mathbf}
+\newcommand{\mr}{\mathrm}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\md}{\mathds}
+\newcommand{\bb}{\mathbb}
+
+%-Sets
+\newcommand{\R}{\bb R}
+\newcommand{\C}{\bb C}
+\newcommand{\Z}{\bb Z}
+\newcommand{\N}{\bb N}
+\newcommand{\Sp}{\bb S}
+\newcommand{\Ba}{\bb B}
+\newcommand{\ball}[2]{\mathcal B_{#1,#2}}
+\newcommand{\indicator}[1]{\mathbbm 1_{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\condset}[2]{ \left\{ #1 \;\middle|\; #2 \right\} }
+
+%-Brackets
+\newcommand{\Brac}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\brac}[1]{\left[ #1 \right]}
+\newcommand{\paren}[1]{ \left( #1 \right) }
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+
+%-Subalign
+\stackMath
+\makeatletter
+\newcommand{\subalign}[1]{%
+  \vcenter{%
+    \Let@ \restore@math@cr \default@tag
+    \baselineskip\fontdimen10 \scriptfont\tw@
+    \advance\baselineskip\fontdimen12 \scriptfont\tw@
+    \lineskip\thr@@\fontdimen8 \scriptfont\thr@@
+    \lineskiplimit\lineskip
+    \ialign{\hfil$\m@th\scriptstyle##$&$\m@th\scriptstyle{}##$\crcr
+      #1\crcr
+    }%
+  }
+}
+\makeatother
+
+%-Diacritical marks
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand\widecheck[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\scalebox{-1}{\tmpbox}}%
+}
+\newcommand{\wc}{\widecheck}
+
+
+
+
+%%% ====== Math Operators ====== %% 
+%-Limit-like math operators
+% \DeclareMathOperator{\xxx}{xxx}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\prox}{prox}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\vect}{vec}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\offdiag}{offdiag}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator*{\mini}{minimize}
+\DeclareMathOperator*{\maxi}{maximize}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\st}{s.t.}
+
+%-Basic Operators
+\newcommand{\norm}[2]{\left\| #1 \right\|_{#2}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\innerprod}[2]{\left\langle #1,  #2 \right\rangle}
+\newcommand{\prob}[1]{\bb P\left[ #1 \right]}
+\newcommand{\expect}[1]{\bb E\left[ #1 \right]}
+\newcommand{\E}{\bb E}
+\newcommand{\integral}[4]{\int_{#1}^{#2}\; #3\; #4}
+\newcommand{\proj}[2]{\mathcal{P}_{#2}\left[ #1 \right]}
+\newcommand{\soft}[2]{\mathcal S_{#2}\left[#1 \right]}
+\renewcommand{\mod}[2]{\left[#1\right]_{#2}}
+
+%-SBD opartors
+\newcommand{\convmtx}[1]{\mb C_{#1}}
+\newcommand{\checkmtx}[1]{\widecheck{\mb C}_{#1}}
+\newcommand{\cconv}{\circledast}
+\newcommand{\shift}[2]{s_{#2}[#1]}
+\newcommand{\injector}{\mb \iota}
+\newcommand{\ip}{\injector}
+\newcommand{\extend}[1]{\widetilde{#1}}
+\newcommand{\problasso}{(P_{\mathrm{lasso}})}
+\newcommand{\probnclone}{(P_{\ell_1-\mathrm{nc}})}
+\newcommand{\probnc}{(P_{\mathrm{nc}})}
+\newcommand{\Pap}{\mathbf P_{\mathbf a^\perp}}
+
+
+%%% ===== Miscellaneous ===== %%%
+%-Common symbols
+\newcommand{\eps}{\varepsilon}
+\newcommand{\event}{\mc E}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\im}{\mathrm{i}}
+\newcommand{\cross}{\times}
+\newcommand{\caseof}[1]{\left\{ \begin{array}{ll} #1 \end{array} \right.}
+
+
+
+
+
+%-Text Formatting
+\newcommand{\notice}{\uline}
+
+%-Comments
+\newcommand{\td}[1]{{\color{magenta}{\bf TODO: #1}}}
+\newcommand{\yz}[1]{{\color{blue}{\bf Yuqian: #1}}}
+\newcommand{\jw}[1]{{\color{blue}{\bf John: #1}}}
+\newcommand{\hk}[1]{{\color{blue}{\bf Henry: #1}}}
+\newcommand{\cmt}[1]{{\color{blue}{\bf #1}}}
+\newcommand{\warning}[1]{{\color{orange}{\bf #1}}}
+\newcommand{\error}[1]{{\color{red}{\bf #1}}}
+
+%-SBD notations
+\newcommand{\goodregion}{\mathfrak R_{\mathrm{good}}}
+\newcommand{\ncregion}{\mathfrak R_{\mathrm{curve}}}
+\newcommand{\ngregion}{\mathfrak R_{\mathrm{grad}}}
+\newcommand{\convexregion}{\mathfrak R_{\mathrm{convex}}}
+\newcommand{\retractregion}{\mathfrak R_{\mathrm{retract}}}
+\newcommand{\deltaretract}{\delta_{\mr{retract}}}
+\newcommand{\epsnc}{\eps_{\mathrm{curve}}}
+\newcommand{\epsng}{\eps_{\mathrm{grad}}}
+\newcommand{\epsconvex}{\eps_{\mathrm{convex}}}
+\newcommand{\epsdist}{\eps_{\mathrm{dist}}}
+\newcommand{\simiid}{\sim_{\mr{i.i.d.}}}
+\newcommand{\clog}{c_{\mr{log}}}
+\newcommand{\epsnet}{\mc N_\eps}
+\newcommand{\eventlip}{\event_{\mr{Lip}}}
+\newcommand{\eventnet}{\event_{\mr{Net}}}
+
+%%% ===== Begin of Document ===== %%%
+\begin{document}
+\title{Automated sample alignment procedure for CLP scans. }
+\author{Han-Wen Kuo, Anna Elisabeth Dorfi}
+
+\maketitle
+\newcommand{\effarea}{\mc S_{\mr{eff}}}
+\newcommand{\effcirc}{\mc C_{\mr{eff}}}
+\newcommand{\rotation}{\mr{Rot}}
+
+\vsni \emph{  Working note please do not redistribute, thanks!  }
+
+
+\vsni This document serves as a platform for discussion on developing an automated method for CLP scans using the programmable motors. So to have a concrete agreement on how to relocate the sample in different scanning direction, and how to related these sample positions to the reconstruction algorithm. 
+
+\vsni There are three motors that are designed to be controlling  the line probe SECM. Two of which are controlling the stage where one rational stage is set on top of another stage that translate vertically, the other motor controls the arm that holds the line probe and bring to close to or away from the samples. A single line scan is carried out by first positioning the sample to the desired place and angle using the stage motors, then brings down the motored arm until the line probe is in full contact with the sample surface. Finally the stage motor push the sample toward  the line probe, until all of the reactive part on sample has been in contact with the probe during this procedure. 
+
+\vsni Our goal is to be fully automating this scanning procedure, or more accurately speaking, to design how to rotate and translate the sample in between the different scanning directions. A single scanned line of scanning angle $\theta$ is carried out by rotating the stage at angle $-\theta$, so the normal direction, or equivalently, the moving direction of the probe, will be aligned with $(\sin\theta,-\cos\theta)$ direction in Cartesian coordinates. Consider we are operating a full scan that consists of $k$ different scaning angles $\paren{\theta_1,\ldots\theta_k}$ where $\theta_1 = 0^\circ $. Through out the whole scanning procedure, the location of the probe will be remaining fixed regardless of the scanning angle. Therefore we define the left end of the probe at $(-L/2,L/2)$, and write both the length of the probe and the scanning distance to be $L$, so the other end of the probe will be at location $(L/2,L/2)$, and the scan ended with probe location at $[(-L/2,-L/2)$, $(L/2,-L/2)]$.  
+
+\vsni During the $i$-th scan, we write the rotational center as $(x_r,y_r)^{(i)}$. Define the effective sample area as a square $\effarea$ as
+\begin{align}
+	\effarea :=\set{(x,y): -L/2\leq x,y\leq L/2}
+\end{align}
+our task is to provide a method to relocate the reactive part of the sample back in the square $\effarea$ every time rotate the stage  to  different scanning angle. Given a  rotational center $(x_r,y_r)$, rotating the stage from angle $0^\circ$ to $-\theta$ move the the point $(x,y)$ to the location
+\begin{align}
+	\rotation_{-\theta}(x,y) = \begin{pmatrix}
+		\cos\theta & \sin\theta \\ -\sin\theta &\cos\theta
+	\end{pmatrix}\begin{pmatrix}
+		x - x_r \\ y-y_r
+	\end{pmatrix} + \begin{pmatrix}
+		x_r\\ y_r
+	\end{pmatrix}
+\end{align} 
+We can observe that for any points in the inscribed circle $\effcirc$ within $\effarea$ where
+\begin{align}
+	\effcirc:=\set{(x,y):x^2 + y^2 \leq L^2/4 } \subset\effarea
+\end{align}
+operate the following translation operation
+\begin{align}
+	\mr T(x,y) =  \begin{pmatrix}
+		\cos\theta-1 &\sin\theta \\ -\sin\theta & \cos\theta-1
+	\end{pmatrix}\begin{pmatrix}
+	x_r \\ y_r
+	\end{pmatrix} + \begin{pmatrix}
+		x \\ y
+	\end{pmatrix}
+\end{align}
+puts $\rotation_{-\theta}\paren{\effcirc}$ back to the inscribed circle. Furthermore, the new point $(x',y')$
+\begin{align}
+	\begin{pmatrix}
+		x'\\ y'
+	\end{pmatrix} =  T\circ\rotation_{-\theta}(x,y) = \begin{pmatrix}
+		\cos\theta & \sin\theta \\ -\sin\theta &\cos\theta
+	\end{pmatrix}\begin{pmatrix}
+		x  \\ y
+	\end{pmatrix} 
+\end{align}
+is the old point $(x,y)$ rotated by $-\theta$ against the origin $(0,0)$. 
+
+\vsni Therefore, we actually do not need any anchor point to relocate the sample, as long as we can make sure the following two things  at the beginning of the scan:
+\begin{enumerate}
+	\item Obtain the precise location of center of rotation relative to the bottom end of the probe.
+	\item Ensure that the whole reactive part of the sample resides within the inscribed circle $\effcirc$ defined by the length of probe $L$ for the first scan.
+\end{enumerate}
+
+\vsni The whole scanning procedure can be written as follows: 
+
+\begin{algorithm}
+	\caption{CLP-SECM Automatic Scanning Procedure}
+	
+	\begin{algorithmic}
+		\Require  Probe length $L$, reactive part of sample lies within $\effcirc$, scan angles $\theta_1,\ldots,\theta_k$ where $\theta_1 = 0^\circ$, and first center of rotation $(x_r,y_r)^{(1)}$ as relative position to left end of probe plus $\paren{-\frac L2,\frac L2}$,
+		\For{$i=1,\ldots,k$} 
+			\State Scan the sample from $\brac{\paren{-\frac L 2,\frac L 2},\paren{\frac L 2,\frac L   2}}$ to $\brac{\paren{-\frac L 2,-\frac L 2}\paren{\frac L 2,-\frac L 2}}$;
+			\If{$i=k$}  
+				\State break;
+			\Else 
+			\State 1. Move the stage to where the scan starts, such that probe position is at $\brac{\paren{-\frac{L}{2},\frac{L}{2}},\paren{\frac{L}2,\frac{L}2} }$;
+			\State 2. Rotate the stage by angle $\theta_\Delta = -\theta_{i+1} + \theta_i$;
+			\State 3. Move the stage by $(x_\Delta,y_\Delta)$ where 
+			\begin{align}
+				\begin{pmatrix}
+				x_\Delta \\ y_\Delta
+				\end{pmatrix} = \begin{pmatrix}
+				\cos\theta_\Delta-1 &\sin\theta_\Delta \\ -\sin\theta_\Delta & \cos\theta_\Delta-1
+				\end{pmatrix}\begin{pmatrix}
+				  x_r^{(i)} \\  y_r^{(i)}
+				\end{pmatrix}; \notag 
+			\end{align}
+			\State 4. Get the new rotational center as $(x_r,y_r)^{(i+1)} \gets(x_r,y_r)^{(i)} + (x_\Delta,y_\Delta) $;
+			\EndIf
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+\vsni The procedure ensures not only that we can always scan the reactive part of the sample, the center of the probe will also always aligned with the center of $\effcirc$. This tremendously simplify the calibration procedure.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%-Sections
+
+
+
+
+
+\end{document}
